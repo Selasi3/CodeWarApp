@@ -19,4 +19,19 @@ public class LeaderboardController {
     public List<ProfileDto> getLeaderboard() {
         return leaderboardFacade.getLeaderboard();
     }
+
+//    @GetMapping("/countUsers")
+//    public int countUsers(){
+//        return leaderboardFacade.countUsers();
+//    }
+
+    @GetMapping("/orderByHonor")
+    public List<ProfileDto> getOrderByHonor(){
+        return leaderboardFacade.getOrderByHonor();
+    }
+
+    @GetMapping("/orderByOverall")
+    public List<ProfileDto> getOrderByOverall(){
+        return leaderboardFacade.getOrderByOverall();
+    }
 }
