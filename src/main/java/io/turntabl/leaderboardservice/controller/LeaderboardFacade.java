@@ -25,9 +25,9 @@ public class LeaderboardFacade {
                 .collect(toList());
     }
 
-//    public int countUsers() {
-//        return 0;
-//    }
+    public int countUsers() {
+        return (int) leaderboardRepositoryService.getProfiles().stream().count();
+    }
     public List<ProfileDto> getOrderByHonor(){
         return  leaderboardRepositoryService.getProfiles().stream()
                 .map(profileToProfileDtoConverter::convert)

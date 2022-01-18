@@ -20,10 +20,10 @@ public class LeaderboardController {
         return leaderboardFacade.getLeaderboard();
     }
 
-//    @GetMapping("/countUsers")
-//    public int countUsers(){
-//        return leaderboardFacade.countUsers();
-//    }
+    @GetMapping("/countUsers")
+    public int countUsers(){
+        return leaderboardFacade.countUsers();
+    }
 
     @GetMapping("/orderByHonor")
     public List<ProfileDto> getOrderByHonor(){
