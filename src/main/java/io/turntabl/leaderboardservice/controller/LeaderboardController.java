@@ -1,11 +1,9 @@
 package io.turntabl.leaderboardservice.controller;
 
+import io.turntabl.leaderboardservice.client.response.AddUser;
 import io.turntabl.leaderboardservice.controller.response.ProfileDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,13 @@ public class LeaderboardController {
 //    public int countUsers(){
 //        return leaderboardFacade.countUsers();
 //    }
+    @PostMapping("/save")
+    public String addUser(@RequestBody AddUser addUser){
+        leaderboardFacade.createUser(addUser);
+
+        return addUser.getUsername() + " created";
+    }
+
 
     @GetMapping("/orderByHonor")
     public List<ProfileDto> getOrderByHonor(){
