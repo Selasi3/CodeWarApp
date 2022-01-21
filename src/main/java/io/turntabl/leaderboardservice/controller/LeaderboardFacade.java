@@ -3,6 +3,7 @@ package io.turntabl.leaderboardservice.controller;
 import io.turntabl.leaderboardservice.client.response.AddUser;
 import io.turntabl.leaderboardservice.controller.response.ProfileDto;
 import io.turntabl.leaderboardservice.converter.ProfileToProfileDtoConverter;
+import io.turntabl.leaderboardservice.model.Profile;
 import io.turntabl.leaderboardservice.service.LeaderboardRepositoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -49,4 +50,12 @@ public class LeaderboardFacade {
         return leaderboardRepositoryService.addUser(addUser);
     }
 
+    public List<ProfileDto> getUsersByCommonLanguage(String language) {
+        return leaderboardRepositoryService.getProfiles().stream()
+                .filter(x->x.getLanguageLevels().stream().anyMatch(y->y.getName().equals(language)))
+                .sorted(Comparator.comparingInt(Profile::getHonour).reversed())
+                .map(profileToProfileDtoConverter::convert)
+                .collect(toList());
+
+    }
 }

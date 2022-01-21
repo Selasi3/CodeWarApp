@@ -41,4 +41,9 @@ public class LeaderboardController {
     public List<ProfileDto> getOrderByOverall(){
         return leaderboardFacade.getOrderByOverall();
     }
+
+    @GetMapping("language/{language}")
+    public List<ProfileDto> getUsersByLanguage(@PathVariable("language") String language ){
+        return leaderboardFacade.getUsersByCommonLanguage(language);
+    }
 }
