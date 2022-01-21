@@ -41,4 +41,70 @@ class LeaderboardControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(result -> assertThat(result.getResponse().getContentAsString()).isEqualTo(objectMapper.writeValueAsString(expectedResponse)));
     }
+
+    @Test
+    void shouldGetLeaderBoardOrderedByHonour() throws Exception{
+        ProfileDto profile1 = ProfileDto.builder()
+                .username("lameiraatt")
+                .name("Ana Lameira")
+                .build();
+
+        ProfileDto profile2 = ProfileDto.builder()
+                .username("aweperi")
+                .name("Adiba Aweperi Emmanuel")
+                .build();
+        List<ProfileDto> expectedResponse = List.of(profile1, profile2);
+
+        when(leaderboardFacade.getOrderByHonor()).thenReturn(expectedResponse);
+
+        mockMvc.perform(get("/v1/leaderboard/orderByHonor"))
+                .andExpect(status().isOk())
+                .andExpect(result -> assertThat(result.getResponse()
+                        .getContentAsString())
+                        .isEqualTo(objectMapper.writeValueAsString(expectedResponse)));
+    }
+    @Test
+    void shouldGetLeaderboardOrderedByOverallRank() throws Exception {
+        ProfileDto profile1 = ProfileDto.builder()
+                .username("lameiraatt")
+                .name("Ana Lameira")
+                .build();
+
+        ProfileDto profile2 = ProfileDto.builder()
+                .username("aweperi")
+                .name("Adiba Aweperi Emmanuel")
+                .build();
+        List<ProfileDto> expectedResponse = List.of(profile1, profile2);
+
+        when(leaderboardFacade.getOrderByOverall()).thenReturn(expectedResponse);
+
+        mockMvc.perform(get("/v1/leaderboard/orderByOverall"))
+                .andExpect(status().isOk())
+                .andExpect(result -> assertThat(result.getResponse()
+                        .getContentAsString())
+                        .isEqualTo(objectMapper.writeValueAsString(expectedResponse)));
+    }
+
+    @Test
+    void shouldGetLeaderboardByLanguage() throws Exception {
+        ProfileDto profile1 = ProfileDto.builder()
+                .username("lameiraatt")
+                .name("Ana Lameira")
+                .build();
+
+        ProfileDto profile2 = ProfileDto.builder()
+                .username("aweperi")
+                .name("Adiba Aweperi Emmanuel")
+                .build();
+
+        List<ProfileDto> expectedResponse = List.of(profile1);
+
+        when(leaderboardFacade.getUsersByCommonLanguage("java")).thenReturn(expectedResponse);
+
+        mockMvc.perform(get("/v1/leaderboard/language/java"))
+                .andExpect(status().isOk())
+                .andExpect(result -> assertThat(result.getResponse()
+                        .getContentAsString())
+                        .isEqualTo(objectMapper.writeValueAsString(expectedResponse)));
+    }
 }
