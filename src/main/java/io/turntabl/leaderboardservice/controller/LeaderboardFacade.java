@@ -1,5 +1,6 @@
 package io.turntabl.leaderboardservice.controller;
 
+import io.turntabl.leaderboardservice.client.response.AddUser;
 import io.turntabl.leaderboardservice.controller.response.ProfileDto;
 import io.turntabl.leaderboardservice.converter.ProfileToProfileDtoConverter;
 import io.turntabl.leaderboardservice.service.LeaderboardRepositoryService;
@@ -42,6 +43,10 @@ public class LeaderboardFacade {
                 .filter(Objects::nonNull)
                 .sorted(Comparator.comparingInt(ProfileDto::getOverallRank).reversed())
                 .collect(toList());
+    }
+
+    public String createUser(AddUser addUser){
+        return leaderboardRepositoryService.addUser(addUser);
     }
 
 }
